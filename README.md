@@ -92,6 +92,7 @@ The platform includes a comprehensive rewards mechanism to incentivize and fund 
 - ML model execution in confidential compute
 - Spatial data processing
 - Zero-knowledge proof generation
+- Multi-party computation (MPC) validation
 
 ### Blockchain Layer
 - Ethereum smart contracts
@@ -105,6 +106,29 @@ The platform includes a comprehensive rewards mechanism to incentivize and fund 
 - Reward distribution system
 - Outcome-based incentive mechanisms
 
+### Hybrid TEE-MPC Architecture
+
+#### TEE Layer (SUAVE)
+Core ML model execution remains in SUAVE's TEE for:
+- Satellite image processing
+- Change detection models
+- Feature extraction
+
+Benefits:
+- Maintains confidentiality of ML model parameters
+- Efficient execution of complex computations
+- Provides computation proofs
+
+#### MPC Validation Layer
+Distributes validation across multiple independent validators. Each validator runs MPC protocol to:
+- Verify input data integrity
+- Validate model outputs
+- Check computation proofs
+
+MPC consensus ensures:
+- No single validator can manipulate results
+- Validation process is transparent
+- Higher trust in the verification process
 
 ## Usage
 
