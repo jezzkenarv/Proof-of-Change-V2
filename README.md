@@ -1,45 +1,42 @@
 # Proof of Change
 
-A decentralized GIS platform that verifies and validates real-world environmental impact through SUAVE confidential compute, satellite imagery analysis, and blockchain attestations.
+A decentralized GIS platform that verifies and validates real-world environmental impact through SUAVE confidential compute, satellite imagery analysis, and blockchain attestations, powered by Astral Protocol's Logbook and Location Proof Protocol.
 
 
 ## Overview
 
-Proof of Change combines SUAVE trusted execution environments (TEEs), machine learning, and Leaflet.js to provide cryptographic proof of environmental impact. Project creators can map their impact zones and leverage ML-powered analysis tools to process historical satellite data, creating verifiable proof of their environmental contributions.
+Proof of Change combines SUAVE trusted execution environments (TEEs), machine learning, and Astral Protocol's Logbook to provide cryptographic proof of environmental impact. Project creators can map their impact zones using Astral's interface and leverage ML-powered analysis tools to process historical satellite data, creating verifiable proof of their environmental contributions through the Location Proof Protocol.
 
 ## System Architecture
 
 ```mermaid
 sequenceDiagram
     participant U as User
-    participant F as Frontend (Leaflet)
-    participant I as IPFS
+    participant L as Logbook
+    participant LPP as Location Proof Protocol
     participant S as Smart Contract
-    participant E as EAS
     participant T as SUAVE TEE
 
-    U->>F: Draw project boundaries
-    U->>F: Input project metadata
-    F->>I: Store boundary data
-    I-->>F: Return IPFS hash
-    F->>S: Register project with hash
-    F->>E: Generate attestation
-    E-->>F: Return attestation UID
+    U->>L: Define project area
+    U->>L: Input project metadata
+    L->>LPP: Generate location proof
+    LPP-->>L: Return proof attestation
+    L->>S: Register project with attestation
     S->>T: Trigger validation
     Note over T: Process spatial data
     Note over T: Run ML models
     Note over T: Generate proof
     T-->>S: Return computation proof
-    S->>E: Update attestation
-    S-->>F: Update project status
-    F->>U: Display results on map
+    S->>LPP: Update attestation
+    S-->>L: Update project status
+    L->>U: Display results
 ```
 
 ### Data Flow
-1. Frontend Collection (Leaflet.js)
-   - Project boundary drawing
+1. Frontend Collection (Astral Logbook)
+   - Project area definition
    - Metadata input
-   - Feature collection
+   - Location proof generation
 
 2. Data Processing
    - Boundary storage in IPFS
@@ -82,10 +79,9 @@ The platform includes a comprehensive rewards mechanism to incentivize and fund 
    - Regular distribution cycles
 
 ### Frontend Layer
-- Leaflet.js for spatial data interaction
-- React/Next.js application framework
+- Astral Logbook for spatial data interaction
+- Location Proof Protocol integration
 - Web3 integration for blockchain interaction
-- IPFS client for data storage
 
 ### Processing Layer
 - SUAVE TEE for secure computation
@@ -105,6 +101,12 @@ The platform includes a comprehensive rewards mechanism to incentivize and fund 
 - Proof of Impact verification
 - Reward distribution system
 - Outcome-based incentive mechanisms
+
+### Verification Layer
+- Location Proof Protocol (LPP)
+- EAS attestations through Astral
+- Custom verification logic
+- Proof validation
 
 ### Hybrid TEE-MPC Architecture
 
@@ -130,103 +132,13 @@ MPC consensus ensures:
 - Validation process is transparent
 - Higher trust in the verification process
 
-## Usage
-
-### 1. Project Registration
-```javascript
-// Draw project boundary and submit
-const project = await ProofOfChange.submitProject({
-  boundary: geojsonData,
-  metadata: {
-    name: "Forest Restoration",
-    type: "reforestation"
-  }
-});
-```
-
-### 2. Data Processing
-```javascript
-// Trigger SUAVE computation
-const computation = await project.processSpatialData({
-  type: "changeDetection",
-  timeframe: "2020-2024"
-});
-```
-
-### 3. Verification
-```javascript
-// Verify computation proof
-const verification = await project.verifyProof(computation.proof);
-```
-
-### 4. Impact Rewards
-```javascript
-// Generate impact proof for verified project
-const impactProof = await project.generateImpactProof({
-  verificationId: verification.id,
-  impactMetrics: {
-    area: "1000ha",
-    timeframe: "2020-2024",
-    impactType: "reforestation"
-  }
-});
-
-// Claim rewards from funding pool
-const rewards = await project.claimRewards({
-  proofId: impactProof.id,
-  verification: verification.proof
-});
-```
-
-## Development Workflow
-
-### Frontend Development
-1. Start the development server
-```bash
-npm run dev
-```
-
-2. Initialize Leaflet map
-```javascript
-const map = L.map('map').setView([0, 0], 2);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-```
-
-3. Enable drawing controls
-```javascript
-const drawControl = new L.Control.Draw({
-  draw: {
-    polygon: true,
-    marker: false
-  }
-});
-map.addControl(drawControl);
-```
-
-### Smart Contract Interaction
-1. Project registration
-```solidity
-function registerProject(
-    bytes32 boundaryHash,
-    string memory metadata
-) external returns (uint256 projectId);
-```
-
-2. SUAVE computation trigger
-```solidity
-function triggerComputation(
-    uint256 projectId,
-    bytes memory computationParams
-) external returns (bytes32 computationId);
-```
-
 ## Roadmap
 
 ### Phase 1 - MVP (Current)
-- [x] Leaflet.js integration
+- [x] Astral Logbook integration
+- [x] Location Proof Protocol integration
 - [x] Basic project registration
-- [ ] IPFS storage implementation
-- [ ] EAS schema definition
+- [ ] Initial TEE implementation
 
 ### Phase 2 - Core Features
 - [ ] SUAVE TEE integration
