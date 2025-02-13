@@ -7,6 +7,10 @@ A decentralized GIS platform that verifies and validates real-world environmenta
 
 Proof of Change combines SUAVE trusted execution environments (TEEs), machine learning, and Astral Protocol's Logbook to provide cryptographic proof of environmental impact. Project creators can map their impact zones using Astral's interface and leverage ML-powered analysis tools to process historical satellite data, creating verifiable proof of their environmental contributions through the Location Proof Protocol.
 
+## Pitch Deck
+
+<embed src="pitch-deck.pdf" type="application/pdf" width="100%" height="600px" />
+
 ## System Architecture
 
 ```mermaid
